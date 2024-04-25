@@ -651,4 +651,48 @@ const fibonacciLength = 10; // Change this value to generate a Fibonacci series 
 const fibonacciSeries = generateFibonacciSeries(fibonacciLength);
 displayFibonacciSeries(fibonacciSeries);
 
+#Name: Image Gallery
+#index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center mb-4">Image Gallery</h1>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="gallery-item">
+          <img src="image1.jpg" alt="Image 1">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="gallery-item">
+          <img src="image2.jpg" alt="Image 2">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="gallery-item">
+          <img src="image3.jpg" alt="Image 3">
+        </div>
+      </div>
+      <!-- Add more image divs as needed -->
+    </div>
+  </div>
+</body>
+</html>
 
+#styles.css
+.gallery-item {
+  margin-bottom: 20px;
+}
+
+.gallery-item img {
+  max-width: 100%;
+  height: auto;
+}
