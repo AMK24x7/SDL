@@ -1,0 +1,604 @@
+Ass 9:
+
+require 'mail'
+
+# Set up SMTP settings
+Mail.defaults do
+  delivery_method :smtp, {
+    :address => 'smtp.gmail.com',
+    :port => 587,
+    :user_name => 'amk24072002@gmail.com',
+    :password => 'dtof lafm mfjj hzil',
+    :authentication => :login,
+    :enable_starttls_auto => true
+  }
+end
+
+# Define email message
+message = Mail.new do
+  from 'amk24072002@gmail.com'
+  to 'amk24072002@gmail.com'
+  subject 'Hello from Ruby!'
+  body 'This is a test email sent from Ruby.'
+end
+
+# Send email
+message.deliver!
+
+
+Ass 8:
+#Name: app.html
+require 'sinatra'
+
+# Method to reverse the name
+def reverse_name(first_name, last_name)
+    "#{last_name} #{first_name}"
+end
+
+get '/' do
+    erb :index
+end
+
+post '/reverse' do
+    first_name = params[:first_name]
+    last_name = params[:last_name]
+    @reversed_name = reverse_name(first_name, last_name)
+    erb :reverse
+end
+
+
+#Name: index.erb
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse Name</title>
+</head>
+
+<body>
+    <h1>Reverse Name</h1>
+    <form action="/reverse" method="POST">
+        <label for="first_name">First Name: </label>
+        <input type="text" id="first_name" name="first_name" required><br>
+        <br>
+
+        <label for="last_name">Last Name: </label>
+        <input type="text" id="last_name" name="last_name" required><br>
+        <br>
+        
+        <button type="submit">Reverse Name</button>
+    </form>
+</body>
+</html>
+
+#Name: reverse.erb
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reversed Name</title>
+    </head>
+<body>
+    <h1>Reversed Name</h1>
+    <p><%= @reversed_name %></p>
+</body>
+</html>
+
+
+calculator.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .calculator {
+      width: 250px;
+      margin: 50px auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .calculator input[type="button"] {
+      width: calc(33.33% - 10px);
+      height: 50px;
+      margin: 5px;
+      font-size: 20px;
+      border: none;
+      cursor: pointer;
+    }
+    .calculator input[type="text"] {
+      width: calc(100% - 10px);
+      height: 50px;
+      font-size: 24px;
+      text-align: right;
+      margin-bottom: 10px;
+      border: none;
+      padding-right: 5px;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" disabled>
+    <div class="row">
+      <input type="button" value="7" onclick="addToDisplay('7')">
+      <input type="button" value="8" onclick="addToDisplay('8')">
+      <input type="button" value="9" onclick="addToDisplay('9')">
+    </div>
+    <div class="row">
+      <input type="button" value="4" onclick="addToDisplay('4')">
+      <input type="button" value="5" onclick="addToDisplay('5')">
+      <input type="button" value="6" onclick="addToDisplay('6')">
+    </div>
+    <div class="row">
+      <input type="button" value="1" onclick="addToDisplay('1')">
+      <input type="button" value="2" onclick="addToDisplay('2')">
+      <input type="button" value="3" onclick="addToDisplay('3')">
+    </div>
+    <div class="row">
+      <input type="button" value="0" onclick="addToDisplay('0')">
+      <input type="button" value="." onclick="addToDisplay('.')">
+      <input type="button" value="/" onclick="addToDisplay('/')">
+    </div>
+    <div class="row">
+      <input type="button" value="*" onclick="addToDisplay('*')">
+      <input type="button" value="-" onclick="addToDisplay('-')">
+      <input type="button" value="+" onclick="addToDisplay('+')">
+    </div>
+    <div class="row">
+      <input type="button" value="=" onclick="calculate()">
+      <input type="button" value="C" onclick="clearDisplay()">
+    </div>
+  </div>
+
+  <script>
+    function addToDisplay(value) {
+      document.getElementById('display').value += value;
+    }
+
+    function calculate() {
+      var expression = document.getElementById('display').value;
+      try {
+        var result = eval(expression);
+        document.getElementById('display').value = result;
+      } catch (error) {
+        document.getElementById('display').value = 'Error';
+      }
+    }
+
+    function clearDisplay() {
+      document.getElementById('display').value = '';
+    }
+  </script>
+</body>
+</html>
+
+
+trainTT.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Railway Time Table</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .timetable {
+      margin-top: 20px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .timetable th, .timetable td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    .timetable th {
+      background-color: #f2f2f2;
+    }
+    .timetable tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align: center;">Railway Time Table</h2>
+  <table class="timetable">
+    <thead>
+      <tr>
+        <th>Train</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Express 101</td>
+        <td>New York</td>
+        <td>Chicago</td>
+        <td>08:00 AM</td>
+        <td>12:00 PM</td>
+      </tr>
+      <tr>
+        <td>Local 202</td>
+        <td>Chicago</td>
+        <td>Los Angeles</td>
+        <td>10:00 AM</td>
+        <td>04:00 PM</td>
+      </tr>
+      <tr>
+        <td>Express 303</td>
+        <td>Los Angeles</td>
+        <td>San Francisco</td>
+        <td>12:00 PM</td>
+        <td>03:00 PM</td>
+      </tr>
+      <!-- Add more rows for other trains -->
+    </tbody>
+  </table>
+</body>
+</html>
+
+#Name: Complaint Management System
+
+#index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Complaint Management System</h1>
+    <form id="complaintForm">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="subject" placeholder="Subject" required>
+        <textarea name="message" placeholder="Message" required></textarea>
+        <button type="submit">Submit Complaint</button>
+    </form>
+    <div id="message"></div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+#styles.css
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 100px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#message {
+    margin-top: 20px;
+    color: green;
+    font-weight: bold;
+}
+
+.error-message {
+    color: red;
+}
+
+#script.js
+document.getElementById('complaintForm').addEventListener('submit', function(event) {
+   event.preventDefault();
+   var formData = new FormData(this);
+
+   fetch('submit_complaint.php', {
+       method: 'POST',
+       body: formData
+   })
+    
+   .then(data => {
+       document.getElementById('message').innerText = data;
+       document.getElementById('complaintForm').reset();
+   })
+   .catch(error => {
+       console.error('Error:', error);
+   });
+});
+
+#submit_complaint.js
+<?php
+$servername = "localhost:3308";
+$username = "root";
+$password = "";
+$dbname = "complaints_db";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$name = $_POST['name'];
+$email = $_POST['email'];
+$subject = $_POST['subject'];
+$message = $_POST['message'];
+
+$sql = "INSERT INTO complaints (name, email, subject, message) VALUES ('$name', '$email', '$subject', '$message')";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Complaint submitted successfully!";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
+?>
+
+#create table in xampp
+CREATE TABLE complaints (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'Open',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+#Name: Design TY TimeTable
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TY Time Table</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .timetable {
+      margin-top: 20px;
+    }
+    .table th, .table td {
+      vertical-align: middle;
+      text-align: center;
+    }
+    .break {
+      border-left: 2px solid #000; /* Vertical line */
+      height: 100%; /* Occupy full height */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 class="text-center">TY Time Table</h2>
+    <div class="timetable">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>Week</th>
+            <th>9:00 - 10:00</th>
+            <th>10:00 - 11:00</th>
+            <th>11:00 - 12:00</th>
+            <th>12:00 - 13:00</th>
+            <th>13:00 - 14:00</th>
+            <th>14:00 - 15:00</th>
+            <th>15:00 - 16:00</th>
+            <th>16:00 - 17:00</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Monday</td>
+            <td>Maths<br>(MJ)</td>
+            <td>Physics<br>(PK)</td>
+            <td>Chemistry<br>(CK)</td>
+            <td>English<br>(EK)</td>
+            <td rowspan="6" class="break">BREAK</td> <!-- Vertical break -->
+            <td>Computer Science<br>(CS)</td>
+            <td>Physics Lab<br>(PK)</td>
+            <td>Chemistry Lab<br>(CK)</td>
+       
+          </tr>
+          <tr>
+            <td>Tuesday</td>
+            <td>Physics<br>(PK)</td>
+            <td>Chemistry<br>(CK)</td>
+            <td>English<br>(EK)</td>
+            <td>Maths<br>(MJ)</td>
+            <!-- No cell for the break -->
+            <td>Physics Lab<br>(PK)</td>
+            <td>Chemistry Lab<br>(CK)</td>
+            <td>English Lab<br>(EK)</td>
+     
+          </tr>
+          <tr>
+            <td>Wednesday</td>
+            <td>English<br>(EK)</td>
+            <td>Maths<br>(MJ)</td>
+            <td>Physics<br>(PK)</td>
+            <td>Chemistry<br>(CK)</td>
+            <td>Computer Science<br>(CS)</td>
+            <td>English Lab<br>(EK)</td>
+            <td>Maths Lab<br>(MJ)</td>
+  
+          </tr>
+          <tr>
+            <td>Thursday</td>
+            <td>Computer Science<br>(CS)</td>
+            <td>English<br>(EK)</td>
+            <td>Maths<br>(MJ)</td>
+            <td>Physics<br>(PK)</td>
+            <td>Chemistry<br>(CK)</td>
+            <td>Computer Science Lab<br>(CS)</td>
+            <td>English Lab<br>(EK)</td>
+
+          </tr>
+          <tr>
+            <td>Friday</td>
+            <td>Chemistry<br>(CK)</td>
+            <td>Computer Science<br>(CS)</td>
+            <td>English<br>(EK)</td>
+            <td>Maths<br>(MJ)</td>
+            <td>Physics<br>(PK)</td>
+            <td>Chemistry Lab<br>(CK)</td>
+            <td>Computer Science Lab<br>(CS)</td>
+
+          </tr>
+          <tr>
+            <td>Saturday</td>
+            <td>Physics<br>(PK)</td>
+            <td>Chemistry<br>(CK)</td>
+            <td>English<br>(EK)</td>
+            <td>Maths<br>(MJ)</td>
+            <td>Physics Lab<br>(PK)</td>
+            <td>Chemistry Lab<br>(CK)</td>
+            <td>English Lab<br>(EK)</td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
+
+
+#Ass 3
+
+#movies.xml
+<?xml version="1.0" encoding="UTF-8"?>
+<movies xmlns:xsi="http://www.w3.org/2001/XMLSchemainstance" xsi:noNamespaceSchemaLocation="movies.xsd">
+ <movie>
+ <title>The Matrix</title>
+ <director>Lana Wachowski, Lilly Wachowski</director>
+ <releaseYear>1999</releaseYear>
+ <genre>Sci-Fi</genre>
+ </movie>
+ <movie>
+ <title>Forrest Gump</title>
+ <director>Robert Zemeckis</director>
+ <releaseYear>1994</releaseYear>
+ <genre>Drama</genre>
+ </movie>
+ <movie>
+ <title>Inception</title>
+ <director>Christopher Nolan</director>
+ <releaseYear>2010</releaseYear>
+ <genre>Action</genre>
+ </movie>
+</movies>
+
+#movies.xsd
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ <xs:element name="movies">
+ <xs:complexType>
+ <xs:sequence>
+ <xs:element name="movie" 
+maxOccurs="unbounded">
+ <xs:complexType>
+ <xs:sequence>
+ <xs:element name="title" type="xs:string"/>
+ <xs:element name="director" 
+type="xs:string"/>
+ <xs:element name="releaseYear" 
+type="xs:positiveInteger"/>
+ <xs:element name="genre" 
+type="xs:string"/>
+ </xs:sequence>
+ </xs:complexType>
+ </xs:element>
+ </xs:sequence>
+ </xs:complexType>
+ </xs:element>
+</xs:schema>
+
+#Install XAMPP
+cd Downloads/
+chmod 755 xampp-linux-x64-8.2.12-0-installer.run
+sudo ./xampp-linux-x64-8.2.12-0-installer.run
+
+cd/htdocs
+sudo mkdir mysite
+sudo chown -R $USER:USER mysite
+cd mysite/
+code .
+
+#Open Xampp: sudo /opt/lampp/manager-linux-x64.run
+
+#Create connection for ass 6 and 7 register.php
+<?php
+
+$servername = "localhost:3308";
+$username = "root";
+$password = "";
+$database = "user_details";
+
+
+$conn = new mysqli($servername, $username, $password, $database);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+?>
+
