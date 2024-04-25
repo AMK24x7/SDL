@@ -602,3 +602,53 @@ if ($conn->connect_error) {
 
 ?>
 
+#Name: Fibonacci Series
+#index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fibonacci Series</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Fibonacci Series</h1>
+    <div id="fibonacci-sequence"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+
+#styles.css
+.container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#fibonacci-sequence {
+  font-size: 18px;
+}
+
+#script.js
+function generateFibonacciSeries(length) {
+  let fibonacciSeries = [0, 1];
+
+  for (let i = 2; i < length; i++) {
+    fibonacciSeries[i] = fibonacciSeries[i - 1] + fibonacciSeries[i - 2];
+  }
+
+  return fibonacciSeries;
+}
+
+function displayFibonacciSeries(sequence) {
+  const fibonacciSequenceElement = document.getElementById('fibonacci-sequence');
+  fibonacciSequenceElement.textContent = `Fibonacci Series: ${sequence.join(', ')}`;
+}
+
+const fibonacciLength = 10; // Change this value to generate a Fibonacci series of desired length
+const fibonacciSeries = generateFibonacciSeries(fibonacciLength);
+displayFibonacciSeries(fibonacciSeries);
+
+
